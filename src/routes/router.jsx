@@ -8,15 +8,15 @@ export const router = createBrowserRouter([
     path: "/",
     Component: RootLayout,
     children: [
-        {
-            index: true, 
-            Component: Home
-        }, 
-        {
-            path: 'coverage',
-            Component: Coverage, 
-            loader: () => fetch('/serviceCenters.json').then(res => res.json())
-        }
-    ]
+      {
+        index: true,
+        Component: Home,
+      },
+      {
+        path: "coverage",
+        Component: Coverage,
+        loader: () => fetch("/serviceCenters.json").then((res) => res.json()),
+      },
+    ],
   },
 ]);
