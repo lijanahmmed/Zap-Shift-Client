@@ -18,9 +18,8 @@ const Coverage = () => {
 
     if (district) {
       const coord = [district.latitude, district.longitude];
-      console.log(district, coord);
       // go to the location
-      mapRef.current.flyTo(coord, 14);
+      mapRef.current.flyTo(coord, 12);
     }
   };
 
@@ -28,7 +27,6 @@ const Coverage = () => {
     <div>
       <h2 className="text-5xl">We are available in 64 districts</h2>
       <div>
-        {/* search  */}
         <form onSubmit={handleSearch}>
           <label className="input">
             <svg
@@ -57,12 +55,12 @@ const Coverage = () => {
         </form>
       </div>
       {/*  */}
-      <div className="border w-full h-[800px]">
+      <div className="border w-full h-[600px]">
         <MapContainer
           center={position}
-          zoom={8}
+          zoom={7}
           scrollWheelZoom={false}
-          className="h-[800px]"
+          className="h-[600px]"
           ref={mapRef}
         >
           <TileLayer
@@ -73,8 +71,8 @@ const Coverage = () => {
           {serviceCenters.map((center, index) => (
             <Marker key={index} position={[center.latitude, center.longitude]}>
               <Popup>
-                <strong>{center.district}</strong> <br /> Service Area:{" "}
-                {center.covered_area.join(", ")}.
+                <strong>{center.district}</strong> <br />
+                Service Area: {center.covered_area.join(", ")}.
               </Popup>
             </Marker>
           ))}
