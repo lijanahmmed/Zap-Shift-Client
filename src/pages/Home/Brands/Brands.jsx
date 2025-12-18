@@ -22,24 +22,26 @@ const brandLogos = [
 
 const Brands = () => {
   return (
-    <Swiper
-      loop={true}
-      slidesPerView={4}
-      centeredSlides={true}
-      spaceBetween={30}
-      grabCursor={true}
-      modules={[Autoplay]}
-      autoplay={{
-        delay: 1000,
-        disableOnInteraction: false,
-      }}
-    >
-      {brandLogos.map((logo, index) => (
-        <SwiperSlide key={index}>
-          <img src={logo} alt="" />
-        </SwiperSlide>
-      ))}
-    </Swiper>
+    <div className="mt-15">
+      <Swiper
+        loop={true}
+        slidesPerView={4}
+        centeredSlides={true}
+        spaceBetween={30}
+        grabCursor={true}
+        modules={[Autoplay]}
+        autoplay={{
+          delay: 1000,
+          disableOnInteraction: false,
+        }}
+      >
+        {brandLogos.map((logo, index) => (
+          <SwiperSlide key={index}>
+            <img src={logo} alt="" />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
   );
 };
 

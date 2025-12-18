@@ -5,16 +5,16 @@ import ReviewCard from "./ReviewCard";
 
 const Reviews = ({ reviewsPromise }) => {
   const reviews = use(reviewsPromise);
-  console.log(reviews);
   return (
-    <div className="my-24">
-      <div className="text-center mb-24">
-        <h3 className="text-3xl text-center font-bold my-8">Review</h3>
-        <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Non soluta,
-          perspiciatis esse eius praesentium similique asperiores quasi veniam
-          repellat architecto repellendus, deserunt accusantium, debitis ipsa.
-          Expedita possimus facilis voluptas deserunt.
+    <div className="mt-20 w-11/12 md:w-10/12 mx-auto">
+      <div className="text-center">
+        <h3 className="text-2xl md:text-3xl text-center font-bold">
+          What our customers are sayings
+        </h3>
+        <p className="max-w-2xl mx-auto">
+          Enhance posture, mobility, and well-being effortlessly with Posture
+          Pro. Achieve proper alignment, reduce pain, and strengthen your body
+          with ease!
         </p>
       </div>
 
