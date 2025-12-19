@@ -2,13 +2,17 @@ import React, { use } from "react";
 import { Autoplay, EffectCoverflow, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import ReviewCard from "./ReviewCard";
+import icon from "../../../assets/customer-top.png";
 
 const Reviews = ({ reviewsPromise }) => {
   const reviews = use(reviewsPromise);
   return (
     <div className="mt-20 w-11/12 md:w-10/12 mx-auto">
-      <div className="text-center">
-        <h3 className="text-2xl md:text-3xl text-center font-bold">
+      <div className="flex justify-center">
+        <img src={icon} alt="" />
+      </div>
+      <div className="text-center mt-5 mb-15">
+        <h3 className="text-2xl md:text-3xl text-center font-bold mb-3">
           What our customers are sayings
         </h3>
         <p className="max-w-2xl mx-auto">
