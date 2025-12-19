@@ -5,11 +5,12 @@ const Services = () => {
   return (
     <div className="w-11/12 md:w-10/12 mx-auto mt-15 px-10 py-20 bg-teal-950 rounded-2xl md:rounded-4xl">
       <h2 className="text-3xl font-bold text-center text-white">
-        How it Works
+        Our Services
       </h2>
       <p className="text-center max-w-2xl mx-auto mt-2 text-gray-300">
-        A simple step-by-step process that shows how ZapShift connects users,
-        automates workflows, and delivers fast, reliable results seamlessly.
+        Enjoy fast, reliable parcel delivery with real-time tracking and zero
+        hassle. From personal packages to business shipments — we deliver on
+        time, every time.
       </p>
       <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         <div className="border border-gray-100 bg-white rounded-2xl p-7 shadow-xl">
