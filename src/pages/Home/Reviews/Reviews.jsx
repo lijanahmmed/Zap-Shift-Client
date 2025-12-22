@@ -4,18 +4,26 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import ReviewCard from "./ReviewCard";
 import icon from "../../../assets/customer-top.png";
 
+// Swiper styles
+import "swiper/css";
+import "swiper/css/effect-coverflow";
+import "swiper/css/pagination";
+
 const Reviews = ({ reviewsPromise }) => {
   const reviews = use(reviewsPromise);
+
   return (
-    <div className="mt-20 w-11/12 md:w-10/12 mx-auto">
+    <div className="mt-16 md:mt-20 w-11/12 md:w-10/12 mx-auto px-1">
+      
       <div className="flex justify-center">
-        <img src={icon} alt="" />
+        <img src={icon} alt="Customer reviews" className="w-14 md:w-auto" />
       </div>
-      <div className="text-center mt-5 mb-15">
-        <h3 className="text-2xl md:text-3xl text-center font-bold mb-3">
-          What our customers are sayings
+
+      <div className="text-center mt-5 mb-10">
+        <h3 className="text-xl md:text-3xl font-bold mb-3">
+          What our customers are saying
         </h3>
-        <p className="max-w-2xl mx-auto">
+        <p className="max-w-2xl mx-auto text-sm md:text-base text-gray-600">
           Enhance posture, mobility, and well-being effortlessly with Posture
           Pro. Achieve proper alignment, reduce pain, and strengthen your body
           with ease!
@@ -23,29 +31,41 @@ const Reviews = ({ reviewsPromise }) => {
       </div>
 
       <Swiper
-        loop={true}
-        effect={"coverflow"}
-        grabCursor={true}
-        centeredSlides={true}
-        slidesPerView={3}
-        coverflowEffect={{
-          rotate: 30,
-          stretch: "50%",
-          depth: 200,
-          modifier: 1,
-          scale: 0.75,
-          slideShadows: true,
-        }}
+        loop
+        grabCursor
+        centeredSlides
         autoplay={{
           delay: 2000,
           disableOnInteraction: false,
         }}
-        pagination={true}
+        pagination={{ clickable: true }}
+        effect="coverflow"
+        coverflowEffect={{
+          rotate: 20,
+          stretch: 0,
+          depth: 150,
+          modifier: 1,
+          slideShadows: false,
+        }}
+        breakpoints={{
+          0: {
+            slidesPerView: 1,
+          },
+          640: {
+            slidesPerView: 1.5,
+          },
+          768: {
+            slidesPerView: 2,
+          },
+          1024: {
+            slidesPerView: 3,
+          },
+        }}
         modules={[EffectCoverflow, Pagination, Autoplay]}
-        className="mySwiper"
+        className="pb-12"
       >
         {reviews.map((review) => (
-          <SwiperSlide key={review.id}>
+          <SwiperSlide key={review.id} className="px-2">
             <ReviewCard review={review}></ReviewCard>
           </SwiperSlide>
         ))}
