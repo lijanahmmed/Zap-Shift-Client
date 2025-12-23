@@ -1,20 +1,40 @@
 import React from "react";
 import Logo from "../../../components/Logo/Logo";
+import { NavLink } from "react-router";
 
 const Footer = () => {
+  const links = (
+    <>
+      <li>
+        <NavLink to="/">Home</NavLink>
+      </li>
+      <li>
+        <NavLink to="">Services</NavLink>
+      </li>
+      <li>
+        <NavLink to="/about">About</NavLink>
+      </li>
+      <li>
+        <NavLink to="/coverage">Coverage</NavLink>
+      </li>
+    </>
+  );
+
   return (
-    <footer className="footer footer-horizontal text-secondary footer-center p-10">
-      <aside>
-        <Logo></Logo>
-        <p className="font-bold">
-          ACME Industries Ltd.
-          <br />
-          Providing reliable tech since 1992
+    <div className="w-11/12 md:w-10/12 mx-auto text-white pt-15">
+      <div className="">
+       <div className="flex justify-center gap-3"> <Logo></Logo></div>
+        <p className="max-w-2xl mx-auto text-center my-3">
+          Enjoy fast, reliable parcel delivery with real-time tracking and zero
+          hassle. From personal packages to business shipments — we deliver on
+          time, every time.
         </p>
-        <p>Copyright © {new Date().getFullYear()} - All right reserved</p>
-      </aside>
-      <nav>
-        <div className="grid grid-flow-col gap-4">
+      </div>
+      <div className="flex justify-center gap-3">
+        <ul className="menu menu-horizontal px-1">{links}</ul>
+      </div>
+      <nav className="flex justify-center my-3">
+        <div className="flex gap-3">
           <a>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -50,7 +70,8 @@ const Footer = () => {
           </a>
         </div>
       </nav>
-    </footer>
+      <p className="text-center mt-5 pb-3">Copyright © {new Date().getFullYear()} - All right reserved</p>
+    </div>
   );
 };
 

@@ -24,9 +24,9 @@ const Coverage = () => {
   };
 
   return (
-    <div>
-      <h2 className="text-5xl">We are available in 64 districts</h2>
-      <div>
+    <div className="mt-20 w-11/12 md:w-10/12 mx-auto">
+      <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold">We are available in 64 districts</h2>
+      <div className="my-5">
         <form onSubmit={handleSearch}>
           <label className="input">
             <svg
@@ -54,7 +54,7 @@ const Coverage = () => {
           </label>
         </form>
       </div>
-      {/*  */}
+      <h3 className="text-lg md:text-xl lg:text-2xl font-bold mt-10 mb-2">We deliver almost all over Bangladesh</h3>
       <div className="border w-full h-[600px]">
         <MapContainer
           center={position}

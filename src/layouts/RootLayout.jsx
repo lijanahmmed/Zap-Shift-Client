@@ -12,7 +12,7 @@ const RootLayout = () => {
       <div className="flex-1">
         <Outlet></Outlet>
       </div>
-      <div>
+      <div className="bg-lime-950 mt-20">
         <Footer></Footer>
       </div>
     </div>
