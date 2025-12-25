@@ -20,7 +20,7 @@ const ErrorPage = () => {
         </p>
         <button
             onClick={handleGoHome}
-          className="btn bg-gradient-to-r from-lime-400 to-lime-300 font-bold mt-5"
+          className="btn bg-primary font-bold mt-5"
         >
           Go Home!
         </button>

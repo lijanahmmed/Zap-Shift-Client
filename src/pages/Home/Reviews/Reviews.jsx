@@ -14,7 +14,6 @@ const Reviews = ({ reviewsPromise }) => {
 
   return (
     <div className="mt-16 md:mt-20 w-11/12 md:w-10/12 mx-auto px-1">
-      
       <div className="flex justify-center">
         <img src={icon} alt="Customer reviews" className="w-14 md:w-auto" />
       </div>
@@ -31,7 +30,7 @@ const Reviews = ({ reviewsPromise }) => {
       </div>
 
       <Swiper
-        loop
+        loop={true}
         grabCursor
         centeredSlides
         autoplay={{

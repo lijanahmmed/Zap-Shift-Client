@@ -12,10 +12,10 @@ import { Autoplay } from "swiper/modules";
 
 const brandLogos = [
   amazon,
-  amazon_vector,
   casio,
   moonstar,
   randstad,
+  amazon_vector,
   star,
   start_people,
 ];
@@ -23,9 +23,11 @@ const brandLogos = [
 const Brands = () => {
   return (
     <div className="mt-15">
-      <h2 className="text-2xl font-bold text-center mb-10">We've helped thousands of sales teams</h2>
+      <h2 className="text-2xl font-bold text-center mb-10">
+        We've helped thousands of sales teams
+      </h2>
       <Swiper
-        loop={true}
+        loop={brandLogos.length >= 8}
         slidesPerView={4}
         centeredSlides={true}
         spaceBetween={30}

@@ -1,6 +1,6 @@
 import React from "react";
 import Logo from "../../../components/Logo/Logo";
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 
 const Footer = () => {
   const links = (
@@ -23,7 +23,9 @@ const Footer = () => {
   return (
     <div className="w-11/12 md:w-10/12 mx-auto text-white pt-15">
       <div className="">
-       <div className="flex justify-center gap-3"> <Logo></Logo></div>
+        <Link to="/" className="flex justify-center gap-3">
+          <Logo></Logo>
+        </Link>
         <p className="max-w-2xl mx-auto text-center my-3">
           Enjoy fast, reliable parcel delivery with real-time tracking and zero
           hassle. From personal packages to business shipments — we deliver on
@@ -70,7 +72,9 @@ const Footer = () => {
           </a>
         </div>
       </nav>
-      <p className="text-center mt-5 pb-3">Copyright © {new Date().getFullYear()} - All right reserved</p>
+      <p className="text-center mt-5 pb-3">
+        Copyright © {new Date().getFullYear()} - All right reserved
+      </p>
     </div>
   );
 };
