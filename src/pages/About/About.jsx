@@ -9,7 +9,7 @@ const About = () => {
           to="/about/story"
           className={({ isActive }) =>
             isActive
-              ? "text-950 font-extrabold border-b-4 pb-1"
+              ? "text-gray-950 font-extrabold border-b-4 pb-1"
               : "text-gray-600 font-bold"
           }
         >
@@ -21,7 +21,7 @@ const About = () => {
           to="/about/mission"
           className={({ isActive }) =>
             isActive
-              ? "text-950 font-extrabold border-b-4 pb-1"
+              ? "text-gray-950 font-extrabold border-b-4 pb-1"
               : "text-gray-600 font-bold"
           }
         >
@@ -33,7 +33,7 @@ const About = () => {
           to="/about/success"
           className={({ isActive }) =>
             isActive
-              ? "text-950 font-extrabold border-b-4 pb-1"
+              ? "text-gray-950 font-extrabold border-b-4 pb-1"
               : "text-gray-600 font-bold"
           }
         >
@@ -45,7 +45,7 @@ const About = () => {
           to="/about/team"
           className={({ isActive }) =>
             isActive
-              ? "text-950 font-extrabold border-b-4 pb-1"
+              ? "text-gray-950 font-extrabold border-b-4 pb-1"
               : "text-gray-600 font-bold"
           }
         >

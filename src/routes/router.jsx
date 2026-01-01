@@ -8,6 +8,9 @@ import Story from "../pages/About/Story/Story";
 import Mission from "../pages/About/Mission/Mission";
 import Success from "../pages/About/Success/Success";
 import Team from "../pages/About/Team/Team";
+import AuthLayout from "../layouts/AuthLayout";
+import Login from "../pages/Auth/Login/Login";
+import Register from "../pages/Auth/Register/Register";
 
 export const router = createBrowserRouter([
   {
@@ -52,6 +55,20 @@ export const router = createBrowserRouter([
       {
         path: "*",
         Component: ErrorPage,
+      },
+    ],
+  },
+  {
+    path: "/",
+    Component: AuthLayout,
+    children: [
+      {
+        path: "/login",
+        Component: Login,
+      },
+      {
+        path: "/register",
+        Component: Register,
       },
     ],
   },
