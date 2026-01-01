@@ -16,7 +16,7 @@ const Register = () => {
     <div className="card bg-base-100 w-full md:max-w-sm shrink-0 shadow-2xl">
       <div className="card-body">
         <h1 className="text-4xl font-bold">Create an Account</h1>
-        <p>Register with ZapShift</p>
+        <p className="text-gray-400">Register with ZapShift</p>
         <form onSubmit={handleSubmit(handleRegistration)}>
           <fieldset className="fieldset mt-3">
             <label className="label">Name</label>
