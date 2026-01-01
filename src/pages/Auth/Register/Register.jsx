@@ -1,6 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import useAuth from "../../../Hook/useAuth";
+import { toast } from "react-toastify";
 
 const Register = () => {
   const {
@@ -8,12 +10,31 @@ const Register = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const { registerUser, loginWithGoogle } = useAuth();
+  const navigate = useNavigate();
+
   const handleRegistration = (data) => {
-    console.log(data);
+    registerUser(data.email, data.password)
+      .then(() => {
+        toast.success("Registration successful!!");
+        navigate("/");
+
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
+  const handleGoogleLogin = () => {
+    loginWithGoogle()
+      .then(() => {
+        toast.success("Registration successful!!");
+        navigate("/");
+      })
+      .catch((error) => toast.error(error.message));
   };
 
   return (
-    <div className="card bg-base-100 w-full md:max-w-sm shrink-0 shadow-2xl">
+    <div className="card bg-base-100 w-full md:max-w-sm mx-auto shrink-0 shadow-2xl">
       <div className="card-body">
         <h1 className="text-4xl font-bold">Create an Account</h1>
         <p className="text-gray-400">Register with ZapShift</p>
@@ -72,14 +93,18 @@ const Register = () => {
             <button className="btn mt-4 bg-primary font-bold">Register</button>
             <p>
               Already have an account?{" "}
-              <Link to="/login" className="text-green-900 hover:underline">
+              <Link to="/login" className="text-green-900 underline">
                 Login
               </Link>
             </p>
 
             <p className="font-bold text-gray-500 text-center">Or</p>
 
-            <button className="btn bg-gray-100">
+            <button
+              type="button"
+              onClick={handleGoogleLogin}
+              className="btn bg-gray-100"
+            >
               <svg
                 aria-label="Google logo"
                 width="16"

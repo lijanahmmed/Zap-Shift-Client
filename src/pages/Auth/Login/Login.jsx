@@ -1,6 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import useAuth from "../../../Hook/useAuth";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const {
@@ -8,13 +10,28 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const { loginUser, loginWithGoogle } = useAuth();
+  const navigate = useNavigate();
 
   const handleLogin = (data) => {
-    console.log(data);
+    loginUser(data.email, data.password)
+      .then(() => {
+        toast.success("Log in successful!!");
+        navigate("/");
+      })
+      .catch((error) => toast.error(error.message));
+  };
+  const handleGoogleLogin = () => {
+    loginWithGoogle()
+      .then(() => {
+        toast.success("Log in successful!");
+        navigate("/");
+      })
+      .catch((error) => toast.error(error.message));
   };
 
   return (
-    <div className="card bg-base-100 w-full md:max-w-sm shrink-0 shadow-2xl">
+    <div className="card bg-base-100 w-full md:max-w-sm mx-auto shrink-0 shadow-2xl">
       <div className="card-body">
         <h1 className="text-4xl font-bold">Welcome Back</h1>
         <p className="text-gray-400">Login with ZapShift</p>
@@ -50,14 +67,18 @@ const Login = () => {
             <button className="btn mt-4 bg-primary font-bold">Login</button>
             <p>
               Don’t have any account?{" "}
-              <Link to="/register" className="text-green-900 hover:underline">
+              <Link to="/register" className="text-green-900 underline">
                 Register
               </Link>
             </p>
 
             <p className="font-bold text-gray-500 text-center">Or</p>
 
-            <button className="btn bg-gray-100">
+            <button
+              type="button"
+              onClick={handleGoogleLogin}
+              className="btn bg-gray-100"
+            >
               <svg
                 aria-label="Google logo"
                 width="16"
