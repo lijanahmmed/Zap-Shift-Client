@@ -7,6 +7,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "../../Firebase/firebase.confiq";
 
@@ -25,6 +26,9 @@ const AuthProvider = ({ children }) => {
   const loginWithGoogle = () => {
     return signInWithPopup(auth, googleProvider);
   };
+  const updateUserProfile = (profile) => {
+    return updateProfile(auth.currentUser, profile)
+  }
   const logOutUser = () => {
     return signOut(auth);
   };
@@ -45,6 +49,7 @@ const AuthProvider = ({ children }) => {
     registerUser,
     loginUser,
     loginWithGoogle,
+    updateUserProfile,
     logOutUser,
   };
 

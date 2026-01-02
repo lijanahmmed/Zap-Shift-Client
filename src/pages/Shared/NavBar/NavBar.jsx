@@ -87,25 +87,34 @@ const NavBar = () => {
       <div className="navbar-end">
         <div>
           {user ? (
-            <div className="dropdown dropdown-end">
-              <div tabIndex={0} role="button" className="btn m-1">
-                User
+            <div className="flex gap-2 items-center">
+              <div className="dropdown dropdown-end">
+                <div tabIndex={0} role="button" className="m-1">
+                  <img
+                    className="w-10 rounded-full"
+                    src={user.photoURL}
+                    alt=""
+                  />
+                </div>
+                <ul
+                  tabIndex="-1"
+                  className="dropdown-content menu bg-base-100 rounded-box z-10 w-52 p-2 shadow-sm"
+                >
+                  <li className="font-bold">{user.displayName}</li>
+                  <li className="text-gray-500">{user.email}</li>
+                  <li>
+                    <button
+                      onClick={handleLogOut}
+                      className="btn bg-primary mt-2"
+                    >
+                      Log Out
+                    </button>
+                  </li>
+                </ul>
               </div>
-              <ul
-                tabIndex="-1"
-                className="dropdown-content menu bg-base-100 rounded-box z-10 w-52 p-2 shadow-sm"
-              >
-                <li className="font-bold">{user.displayName}</li>
-                <li className="text-gray-500">{user.email}</li>
-                <li>
-                  <button
-                    onClick={handleLogOut}
-                    className="btn bg-primary mt-2"
-                  >
-                    Log Out
-                  </button>
-                </li>
-              </ul>
+              <div>
+                <Link className="btn btn-primary text-black">Be a Rider</Link>
+              </div>
             </div>
           ) : (
             <div className="flex items-center gap-1">

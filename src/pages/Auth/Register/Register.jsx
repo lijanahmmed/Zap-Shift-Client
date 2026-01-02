@@ -1,8 +1,9 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import useAuth from "../../../Hook/useAuth";
-import { toast } from "react-toastify";
+import toast from "react-toastify";
+import axios from "axios";
 
 const Register = () => {
   const {
@@ -10,15 +11,32 @@ const Register = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { registerUser, loginWithGoogle } = useAuth();
+  const { registerUser, loginWithGoogle, updateUserProfile } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleRegistration = (data) => {
+    const profileImg = data.file[0];
+
     registerUser(data.email, data.password)
       .then(() => {
-        toast.success("Registration successful!!");
-        navigate("/");
+        const formData = new FormData();
+        formData.append("image", profileImg);
+        const imageApiUrl = `https://api.imgbb.com/1/upload?key=${
+          import.meta.env.VITE_imageHostKey
+        }`;
+        axios.post(imageApiUrl, formData).then((res) => {
+          const userprofile = {
+            displayName: data.name,
+            photoURL: res.data.data.url,
+          };
+          updateUserProfile(userprofile)
+            .then()
+            .catch((error) => toast.error(error.message));
+        });
 
+        toast.success("Registration successful!!");
+        navigate(`${location.state ? location.state : "/"}`);
       })
       .catch((error) => {
         toast.error(error.message);
@@ -28,7 +46,7 @@ const Register = () => {
     loginWithGoogle()
       .then(() => {
         toast.success("Registration successful!!");
-        navigate("/");
+        navigate(`${location.state ? location.state : "/"}`);
       })
       .catch((error) => toast.error(error.message));
   };
@@ -40,6 +58,17 @@ const Register = () => {
         <p className="text-gray-400">Register with ZapShift</p>
         <form onSubmit={handleSubmit(handleRegistration)}>
           <fieldset className="fieldset mt-3">
+            <label className="label">Photo</label>
+            <input
+              type="file"
+              {...register("file", { required: true })}
+              className="file-input w-full"
+              placeholder="photo"
+            />
+            {errors.name?.type === "required" && (
+              <p className="text-red-500">Photo is required</p>
+            )}
+
             <label className="label">Name</label>
             <input
               type="name"

@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import useAuth from "../../../Hook/useAuth";
 import { toast } from "react-toastify";
 
@@ -12,12 +12,13 @@ const Login = () => {
   } = useForm();
   const { loginUser, loginWithGoogle } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogin = (data) => {
     loginUser(data.email, data.password)
       .then(() => {
         toast.success("Log in successful!!");
-        navigate("/");
+        navigate(`${location.state ? location.state : "/"}`);
       })
       .catch((error) => toast.error(error.message));
   };
@@ -25,7 +26,7 @@ const Login = () => {
     loginWithGoogle()
       .then(() => {
         toast.success("Log in successful!");
-        navigate("/");
+        navigate(`${location.state ? location.state : "/"}`);
       })
       .catch((error) => toast.error(error.message));
   };
