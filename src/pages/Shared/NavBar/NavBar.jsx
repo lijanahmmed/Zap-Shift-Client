@@ -1,11 +1,13 @@
 import React from "react";
 import Logo from "../../../components/Logo/Logo";
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useNavigate } from "react-router";
 import useAuth from "../../../Hook/useAuth";
 import { toast } from "react-toastify";
 
 const NavBar = () => {
-  const { user, logOutUser } = useAuth();
+  const { user, loading, logOutUser } = useAuth();
+  const navigate = useNavigate();
+  console.log(user);
   const links = (
     <>
       <li>
@@ -44,6 +46,7 @@ const NavBar = () => {
     logOutUser()
       .then(() => {
         toast.info("Log out!!");
+        navigate("/");
       })
       .catch((error) => {
         toast.error(error.message);
@@ -56,7 +59,7 @@ const NavBar = () => {
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
+              className="h-5 w-5 -ml-5"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -86,7 +89,9 @@ const NavBar = () => {
       </div>
       <div className="navbar-end">
         <div>
-          {user ? (
+          {loading ? (
+            <span className="loading loading-spinner loading-xl"></span>
+          ) : user ? (
             <div className="flex gap-2 items-center">
               <div className="dropdown dropdown-end">
                 <div tabIndex={0} role="button" className="m-1">
@@ -113,7 +118,7 @@ const NavBar = () => {
                 </ul>
               </div>
               <div>
-                <Link className="btn btn-primary text-black">Be a Rider</Link>
+                <Link to="/be-a-rider" className="btn btn-primary text-black">Be a Rider</Link>
               </div>
             </div>
           ) : (

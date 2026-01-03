@@ -2,7 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router";
 import useAuth from "../../../Hook/useAuth";
-import toast from "react-toastify";
+import { toast } from "react-toastify";
 import axios from "axios";
 
 const Register = () => {
@@ -11,7 +11,7 @@ const Register = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { registerUser, loginWithGoogle, updateUserProfile } = useAuth();
+  const { setLoading, registerUser, loginWithGoogle, updateUserProfile } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -31,12 +31,13 @@ const Register = () => {
             photoURL: res.data.data.url,
           };
           updateUserProfile(userprofile)
-            .then()
+            .then(() => {
+              setLoading(false);
+              toast.success("Registration successful!!");
+              navigate(`${location.state ? location.state : "/"}`);
+            })
             .catch((error) => toast.error(error.message));
         });
-
-        toast.success("Registration successful!!");
-        navigate(`${location.state ? location.state : "/"}`);
       })
       .catch((error) => {
         toast.error(error.message);
@@ -45,6 +46,7 @@ const Register = () => {
   const handleGoogleLogin = () => {
     loginWithGoogle()
       .then(() => {
+        setLoading(false);
         toast.success("Registration successful!!");
         navigate(`${location.state ? location.state : "/"}`);
       })
@@ -71,7 +73,7 @@ const Register = () => {
 
             <label className="label">Name</label>
             <input
-              type="name"
+              type="text"
               {...register("name", { required: true })}
               className="input w-full"
               placeholder="Name"
@@ -122,7 +124,11 @@ const Register = () => {
             <button className="btn mt-4 bg-primary font-bold">Register</button>
             <p>
               Already have an account?{" "}
-              <Link to="/login" className="text-green-900 underline">
+              <Link
+                state={location.state}
+                to="/login"
+                className="text-green-900 underline"
+              >
                 Login
               </Link>
             </p>

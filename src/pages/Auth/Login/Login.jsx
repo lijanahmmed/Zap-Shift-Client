@@ -8,23 +8,37 @@ const Login = () => {
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors },
   } = useForm();
-  const { loginUser, loginWithGoogle } = useAuth();
+  const { setLoading, loginUser, loginWithGoogle, forgetPassword } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
   const handleLogin = (data) => {
     loginUser(data.email, data.password)
       .then(() => {
+        setLoading(false);
         toast.success("Log in successful!!");
         navigate(`${location.state ? location.state : "/"}`);
       })
       .catch((error) => toast.error(error.message));
   };
+  const handleForgetPassword = () => {
+    const email = getValues("email");
+    forgetPassword(email)
+      .then(() => {
+        toast.info("Password reset email sent");
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
+
   const handleGoogleLogin = () => {
     loginWithGoogle()
       .then(() => {
+        setLoading(false);
         toast.success("Log in successful!");
         navigate(`${location.state ? location.state : "/"}`);
       })
@@ -63,12 +77,22 @@ const Login = () => {
             )}
 
             <div>
-              <a className="link link-hover">Forgot password?</a>
+              <button
+                type="button"
+                onClick={handleForgetPassword}
+                className="link link-hover"
+              >
+                Forgot password?
+              </button>
             </div>
             <button className="btn mt-4 bg-primary font-bold">Login</button>
             <p>
               Don’t have any account?{" "}
-              <Link to="/register" className="text-green-900 underline">
+              <Link
+                state={location.state}
+                to="/register"
+                className="text-green-900 underline"
+              >
                 Register
               </Link>
             </p>
