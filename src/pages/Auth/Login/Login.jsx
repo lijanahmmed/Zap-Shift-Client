@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router";
 import useAuth from "../../../Hook/useAuth";
 import { toast } from "react-toastify";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
   const {
@@ -14,6 +15,7 @@ const Login = () => {
   const { setLoading, loginUser, loginWithGoogle, forgetPassword } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const [show, setShow] = useState(false);
 
   const handleLogin = (data) => {
     loginUser(data.email, data.password)
@@ -63,15 +65,23 @@ const Login = () => {
               <p className="text-red-500">Email is required</p>
             )}
 
-            <label className="label">Password</label>
-            <input
-              type="password"
-              className="input w-full"
-              {...register("password", {
-                required: true,
-              })}
-              placeholder="Password"
-            />
+            <div className="relative">
+              <label className="label">Password</label>
+              <input
+                type={show ? "text" : "password"}
+                className="input w-full"
+                {...register("password", {
+                  required: true,
+                })}
+                placeholder="Password"
+              />
+              <span
+                onClick={() => setShow(!show)}
+                className="absolute mt-4 -ml-7 cursor-pointer z-50"
+              >
+                {show ? <FaEyeSlash /> : <FaEye />}
+              </span>
+            </div>
             {errors.password?.type === "required" && (
               <p className="text-red-500">Password is required.</p>
             )}

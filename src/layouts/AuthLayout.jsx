@@ -1,12 +1,14 @@
 import React from "react";
 import Logo from "../components/Logo/Logo";
-import { Outlet } from "react-router";
+import { Link, Outlet } from "react-router";
 import authImage from "../assets/authImage.png";
 
 const AuthLayout = () => {
   return (
     <div className="mt-10 w-10/12 mx-auto pb-10">
-      <Logo></Logo>
+      <Link to="/" className="btn btn-ghost text-xl">
+        <Logo></Logo>
+      </Link>
       <div className="md:flex items-center">
         <div className="flex-1 mt-15">
           <Outlet></Outlet>

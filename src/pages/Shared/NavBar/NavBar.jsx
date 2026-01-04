@@ -7,7 +7,6 @@ import { toast } from "react-toastify";
 const NavBar = () => {
   const { user, loading, logOutUser } = useAuth();
   const navigate = useNavigate();
-  console.log(user);
   const links = (
     <>
       <li>
@@ -28,6 +27,16 @@ const NavBar = () => {
           }
         >
           About
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to="/send-parcel"
+          className={({ isActive }) =>
+            isActive ? "bg-primary px-4 font-semibold rounded-3xl" : ""
+          }
+        >
+          Send parcel
         </NavLink>
       </li>
       <li>

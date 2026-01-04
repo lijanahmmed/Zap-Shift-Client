@@ -14,7 +14,7 @@ const BeARider = () => {
   };
   return (
     <div className="w-11/12 md:w-10/12 mx-auto mt-15">
-      <h1 className="text-5xl font-bold">Be a Rider</h1>
+      <h1 className="text-4xl md:text-5xl font-bold">Be a Rider</h1>
       <p className="text-gray-400 mt-2 max-w-2xl">
         Enjoy fast, reliable parcel delivery with real-time tracking and zero
         hassle. From personal packages to business shipments — we deliver on
@@ -25,83 +25,108 @@ const BeARider = () => {
           <div className="card-body">
             <form onSubmit={handleSubmit(handleRiderSubmit)}>
               <fieldset className="fieldset">
-                <label className="label">Your Name</label>
-                <input
-                  type="text"
-                  {...register("name", { required: true })}
-                  className="input w-full"
-                  placeholder="Your Name"
-                />
-                {errors.name?.type === "required" && (
-                  <p className="text-red-500">Name is required</p>
-                )}
+                <div className="flex flex-col lg:flex-row gap-1 lg:gap-5">
+                  <div className="space-y-1">
+                    <label className="label text-black">Your Name</label>
+                    <input
+                      type="text"
+                      {...register("name", { required: true })}
+                      className="input w-full"
+                      placeholder="Your Name"
+                    />
+                    {errors.name?.type === "required" && (
+                      <p className="text-red-500">Name is required</p>
+                    )}
 
-                <label className="label">Driving License Number</label>
-                <input
-                  type="number"
-                  {...register("license", { required: true })}
-                  className="input w-full"
-                  placeholder="Driving License Number"
-                />
-                {errors.license?.type === "required" && (
-                  <p className="text-red-500">
-                    Driving License Number is required
-                  </p>
-                )}
+                    <label className="label text-black">
+                      Driving License Number
+                    </label>
+                    <input
+                      type="number"
+                      {...register("license", { required: true })}
+                      className="input w-full"
+                      placeholder="Driving License Number"
+                    />
+                    {errors.license?.type === "required" && (
+                      <p className="text-red-500">
+                        Driving License Number is required
+                      </p>
+                    )}
 
-                <label className="label">Email</label>
-                <input
-                  type="email"
-                  {...register("email", { required: true })}
-                  className="input w-full"
-                  placeholder="Email"
-                />
-                {errors.email?.type === "required" && (
-                  <p className="text-red-500">Email is required</p>
-                )}
+                    <label className="label text-black">Email</label>
+                    <input
+                      type="email"
+                      {...register("email", { required: true })}
+                      className="input w-full"
+                      placeholder="Email"
+                    />
+                    {errors.email?.type === "required" && (
+                      <p className="text-red-500">Email is required</p>
+                    )}
 
-                <label className="label">NID No</label>
-                <input
-                  type="number"
-                  {...register("nid", { required: true })}
-                  className="input w-full"
-                  placeholder="Nid No"
-                />
-                {errors.nid?.type === "required" && (
-                  <p className="text-red-500">Nid No is required</p>
-                )}
+                    <label className="label text-black">Phone No</label>
+                    <input
+                      type="number"
+                      {...register("phone", { required: true })}
+                      className="input w-full"
+                      placeholder="Phone No"
+                    />
+                    {errors.phone?.type === "required" && (
+                      <p className="text-red-500">Phone No is required</p>
+                    )}
+                  </div>
 
-                <label className="label">Phone No</label>
-                <input
-                  type="number"
-                  {...register("phone", { required: true })}
-                  className="input w-full"
-                  placeholder="Phone No"
-                />
-                {errors.phone?.type === "required" && (
-                  <p className="text-red-500">Phone No is required</p>
-                )}
+                  <div className="space-y-1">
+                    <label className="label text-black">NID No</label>
+                    <input
+                      type="number"
+                      {...register("nid", { required: true })}
+                      className="input w-full"
+                      placeholder="Nid No"
+                    />
+                    {errors.nid?.type === "required" && (
+                      <p className="text-red-500">Nid No is required</p>
+                    )}
 
-                <label className="label">Bike Brand Model and Year</label>
-                <input
-                  type="text"
-                  {...register("model", { required: true })}
-                  className="input w-full"
-                  placeholder="Bike Brand Model and Year"
-                />
-                {errors.model?.type === "required" && (
-                  <p className="text-red-500">Bike Brand Model and Year is required</p>
-                )}
-                <label className="label">Bike Registration Number</label>
-                <input
-                  type="number"
-                  {...register("registration", { required: true })}
-                  className="input w-full"
-                  placeholder="Bike Registration Number"
-                />
-                {errors.registration?.type === "required" && (
-                  <p className="text-red-500">Bike Registration Number is required</p>
-                )}
+                    <label className="label text-black">
+                      Bike Brand Model and Year
+                    </label>
+                    <input
+                      type="text"
+                      {...register("model", { required: true })}
+                      className="input w-full"
+                      placeholder="Bike Brand Model and Year"
+                    />
+                    {errors.model?.type === "required" && (
+                      <p className="text-red-500">
+                        Bike Brand Model and Year is required
+                      </p>
+                    )}
+                    <label className="label text-black">
+                      Bike Registration Number
+                    </label>
+                    <input
+                      type="number"
+                      {...register("registration", { required: true })}
+                      className="input w-full"
+                      placeholder="Bike Registration Number"
+                    />
+                    {errors.registration?.type === "required" && (
+                      <p className="text-red-500">
+                        Bike Registration Number is required
+                      </p>
+                    )}
+                    <label className="label text-black">
+                      Tell Us About Yourself
+                    </label>
+                    <input
+                      type="text"
+                      {...register("yourself", { required: true })}
+                      className="input w-full"
+                      placeholder="Tell Us About Yourself"
+                    />
+                  </div>
+                </div>
 
                 <button className="btn bg-primary font-bold mt-4">
                   Submit
