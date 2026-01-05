@@ -38,7 +38,7 @@ const BeARider = () => {
                       <p className="text-red-500">Name is required</p>
                     )}
 
-                    <label className="label text-black">
+                    <label className="label text-black mt-2">
                       Driving License Number
                     </label>
                     <input
@@ -53,7 +53,7 @@ const BeARider = () => {
                       </p>
                     )}
 
-                    <label className="label text-black">Email</label>
+                    <label className="label text-black mt-2">Email</label>
                     <input
                       type="email"
                       {...register("email", { required: true })}
@@ -64,7 +64,7 @@ const BeARider = () => {
                       <p className="text-red-500">Email is required</p>
                     )}
 
-                    <label className="label text-black">Phone No</label>
+                    <label className="label text-black mt-2">Phone No</label>
                     <input
                       type="number"
                       {...register("phone", { required: true })}
@@ -88,7 +88,7 @@ const BeARider = () => {
                       <p className="text-red-500">Nid No is required</p>
                     )}
 
-                    <label className="label text-black">
+                    <label className="label text-black mt-2">
                       Bike Brand Model and Year
                     </label>
                     <input
@@ -102,7 +102,7 @@ const BeARider = () => {
                         Bike Brand Model and Year is required
                       </p>
                     )}
-                    <label className="label text-black">
+                    <label className="label text-black mt-2">
                       Bike Registration Number
                     </label>
                     <input
@@ -116,7 +116,7 @@ const BeARider = () => {
                         Bike Registration Number is required
                       </p>
                     )}
-                    <label className="label text-black">
+                    <label className="label text-black mt-2">
                       Tell Us About Yourself
                     </label>
                     <input
