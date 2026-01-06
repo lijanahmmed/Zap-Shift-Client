@@ -10,6 +10,7 @@ const Login = () => {
     register,
     handleSubmit,
     getValues,
+    reset,
     formState: { errors },
   } = useForm();
   const { setLoading, loginUser, loginWithGoogle, forgetPassword } = useAuth();
@@ -25,6 +26,7 @@ const Login = () => {
         navigate(`${location.state ? location.state : "/"}`);
       })
       .catch((error) => toast.error(error.message));
+    reset();
   };
   const handleForgetPassword = () => {
     const email = getValues("email");

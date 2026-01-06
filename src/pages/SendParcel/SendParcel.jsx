@@ -1,15 +1,72 @@
 import React from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
+import { useLoaderData } from "react-router";
+import Swal from "sweetalert2";
+import useAxiosSecure from "../../Hook/useAxiosSecure";
+import useAuth from "../../Hook/useAuth";
 
 const SendParcel = () => {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm();
+  const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
+  const serviceCenters = useLoaderData();
+
+  const regionsDuplicate = serviceCenters.map((c) => c.region);
+  const regions = [...new Set(regionsDuplicate)];
+  const senderRegion = useWatch({ control, name: "senderRegion" });
+  const receiverRegion = useWatch({ control, name: "receiverRegion" });
+
+  const districtsByRegion = (region) => {
+    const regionDistrict = serviceCenters.filter((c) => c.region === region);
+    const districts = regionDistrict.map((d) => d.district);
+    return districts;
+  };
 
   const handleSendParcel = (data) => {
-    console.log(data);
+    const isDocument = data.parcelType === "document";
+    const sameDistrict = data.senderDistrict === data.receiverDistrict;
+    const parcelWeight = parseFloat(data.parcelWeight);
+
+    let cost = 0;
+    if (isDocument) {
+      cost = sameDistrict ? 60 : 80;
+    } else {
+      if (parcelWeight < 3) {
+        cost = sameDistrict ? 110 : 150;
+      } else {
+        const minCost = sameDistrict ? 110 : 150;
+        const extraWeight = parcelWeight - 3;
+        const extraCost = sameDistrict
+          ? extraWeight * 40
+          : extraWeight * 40 + 40;
+        cost = minCost + extraCost;
+      }
+    }
+
+    Swal.fire({
+      title: "Agree with the cost?",
+      text: `You will be charged ${cost} taka!`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, I agree!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.post("/parcels", data).then(() => {
+          Swal.fire({
+            title: "Confirm!",
+            text: "Your parcel is sent.",
+            icon: "success",
+          });
+        });
+      }
+    });
   };
 
   return (
@@ -72,35 +129,65 @@ const SendParcel = () => {
               <label className="label text-black">Sender Name</label>
               <input
                 type="text"
-                {...register("senderName", { required: true })}
+                {...register("senderName")}
+                defaultValue={user.displayName}
                 className="input w-full"
                 placeholder="Sender Name"
+                readOnly
               />
-              {errors.senderName?.type === "required" && (
-                <p className="text-red-500">Sender Name is required</p>
-              )}
 
-              <label className="label text-black mt-2">Sender Address</label>
+              <label className="label text-black mt-2">Sender Email</label>
               <input
                 type="text"
-                {...register("senderAddress", { required: true })}
+                {...register("senderEmail")}
+                defaultValue={user?.email}
                 className="input w-full"
-                placeholder="Sender Address"
+                placeholder="Sender Email"
+                readOnly
               />
-              {errors.senderAddress?.type === "required" && (
-                <p className="text-red-500">Sender Address is required</p>
-              )}
-              
+
               <label className="label text-black mt-2">Sender Phone No</label>
               <input
-                type="text"
+                type="number"
                 {...register("senderPhone", { required: true })}
                 className="input w-full"
                 placeholder="Sender Phone No"
               />
               {errors.senderPhone?.type === "required" && (
-                <p className="text-red-500">Sender Phone No is required</p>
+                <p className="text-red-500">Sender Phone is required</p>
               )}
+
+              <fieldset className="fieldset">
+                <legend className="fieldset">Sender Region</legend>
+                <select
+                  {...register("senderRegion", { required: true })}
+                  defaultValue="Sender Region"
+                  className="select w-full"
+                >
+                  <option disabled={true}>Sender Region</option>
+                  {regions.map((region, i) => (
+                    <option key={i} value={region}>
+                      {region}
+                    </option>
+                  ))}
+                </select>
+              </fieldset>
+
+              <fieldset className="fieldset">
+                <legend className="fieldset">Sender District</legend>
+                <select
+                  {...register("senderDistrict", { required: true })}
+                  defaultValue="Sender District"
+                  className="select w-full"
+                >
+                  <option disabled={true}>Sender District</option>
+                  {districtsByRegion(senderRegion).map((district, i) => (
+                    <option key={i} value={district}>
+                      {district}
+                    </option>
+                  ))}
+                </select>
+              </fieldset>
             </fieldset>
           </div>
           <div className="flex-1">
@@ -117,20 +204,20 @@ const SendParcel = () => {
                 <p className="text-red-500">Receiver Name is required</p>
               )}
 
-              <label className="label text-black mt-2">Receiver Address</label>
+              <label className="label text-black mt-2">Receiver Email</label>
               <input
                 type="text"
-                {...register("receiverAddress", { required: true })}
+                {...register("receiverEmail", { required: true })}
                 className="input w-full"
-                placeholder="Receiver Address"
+                placeholder="Receiver Email"
               />
-              {errors.receiverAddress?.type === "required" && (
-                <p className="text-red-500">Receiver Address is required</p>
+              {errors.receiverEmail?.type === "required" && (
+                <p className="text-red-500">Receiver Email is required</p>
               )}
-              
+
               <label className="label text-black mt-2">Receiver Phone No</label>
               <input
-                type="text"
+                type="number"
                 {...register("receiverPhone", { required: true })}
                 className="input w-full"
                 placeholder="Receiver Phone No"
@@ -138,6 +225,38 @@ const SendParcel = () => {
               {errors.receiverPhone?.type === "required" && (
                 <p className="text-red-500">Receiver Phone No is required</p>
               )}
+
+              <fieldset className="fieldset">
+                <legend className="fieldset">Receiver Region</legend>
+                <select
+                  {...register("receiverRegion", { required: true })}
+                  defaultValue="Receiver Region"
+                  className="select w-full"
+                >
+                  <option disabled={true}>Receiver Region</option>
+                  {regions.map((region, i) => (
+                    <option key={i} value={region}>
+                      {region}
+                    </option>
+                  ))}
+                </select>
+              </fieldset>
+
+              <fieldset className="fieldset">
+                <legend className="fieldset">Receiver District</legend>
+                <select
+                  {...register("receiverDistrict", { required: true })}
+                  defaultValue="Receiver District"
+                  className="select w-full"
+                >
+                  <option disabled={true}>Receiver District</option>
+                  {districtsByRegion(receiverRegion).map((district, i) => (
+                    <option key={i} value={district}>
+                      {district}
+                    </option>
+                  ))}
+                </select>
+              </fieldset>
             </fieldset>
           </div>
         </div>

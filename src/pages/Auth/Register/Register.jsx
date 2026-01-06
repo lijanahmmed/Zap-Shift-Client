@@ -10,6 +10,7 @@ const Register = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
   const { setLoading, registerUser, loginWithGoogle, updateUserProfile } =
@@ -45,6 +46,7 @@ const Register = () => {
       .catch((error) => {
         toast.error(error.message);
       });
+    reset();
   };
   const handleGoogleLogin = () => {
     loginWithGoogle()
