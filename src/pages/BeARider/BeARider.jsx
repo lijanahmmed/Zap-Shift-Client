@@ -8,6 +8,7 @@ const BeARider = () => {
     register,
     handleSubmit,
     control,
+    reset,
     formState: { errors },
   } = useForm();
   const serviceCenters = useLoaderData();
@@ -23,6 +24,7 @@ const BeARider = () => {
 
   const handleRiderSubmit = (data) => {
     console.log(data);
+    reset();
   };
   return (
     <div className="w-11/12 md:w-10/12 mx-auto mt-15">

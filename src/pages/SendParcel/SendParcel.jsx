@@ -10,6 +10,7 @@ const SendParcel = () => {
     register,
     handleSubmit,
     control,
+    reset,
     formState: { errors },
   } = useForm();
   const { user } = useAuth();
@@ -67,6 +68,7 @@ const SendParcel = () => {
         });
       }
     });
+    reset();
   };
 
   return (
