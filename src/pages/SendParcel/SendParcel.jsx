@@ -49,6 +49,13 @@ const SendParcel = () => {
       }
     }
 
+    const parcelData = {
+      ...data,
+      cost,
+      status: "pending",
+      createdAt: new Date(),
+    };
+
     Swal.fire({
       title: "Agree with the cost?",
       text: `You will be charged ${cost} taka!`,
@@ -59,7 +66,7 @@ const SendParcel = () => {
       confirmButtonText: "Yes, I agree!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosSecure.post("/parcels", data).then(() => {
+        axiosSecure.post("/parcels", parcelData).then(() => {
           Swal.fire({
             title: "Confirm!",
             text: "Your parcel is sent.",
