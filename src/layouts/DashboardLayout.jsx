@@ -9,6 +9,16 @@ const DashboardLayout = () => {
     <>
       <li>
         <NavLink
+          to="/"
+          className={({ isActive }) =>
+            isActive ? "bg-primary px-4 font-semibold rounded-md" : "hover:bg-primary"
+          }
+        >
+          Home
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
           to="/dashboard"
           className={({ isActive }) =>
             isActive ? "bg-primary px-4 font-semibold rounded-md" : ""
@@ -34,7 +44,7 @@ const DashboardLayout = () => {
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content">
-        <nav className="navbar w-full bg-lime-50">
+        <nav className="navbar w-full bg-lime-50 py-2">
           <label
             htmlFor="my-drawer-4"
             aria-label="open sidebar"
@@ -61,7 +71,7 @@ const DashboardLayout = () => {
                 <Logo></Logo>
               </Link>
             </div>
-            <div className="flex items-center gap-4 mr-10 lg:mr-32">
+            <div className="flex items-center gap-4 mr-10 lg:mr-40">
               <div>
                 <img className="w-10 rounded-full" src={user.photoURL} alt="" />
               </div>
@@ -73,7 +83,7 @@ const DashboardLayout = () => {
           </div>
         </nav>
 
-        <div className="p-4">
+        <div className="w-11/12 mx-auto mt-15">
           <Outlet></Outlet>
         </div>
       </div>
@@ -84,7 +94,7 @@ const DashboardLayout = () => {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <div className="flex flex-col items-start bg-lime-50 w-44 mt-16 pt-2 pb-5 lg:mt-0 lg:pt-16">
+        <div className="min-h-full flex flex-col items-start bg-lime-50 w-44 mt-16 pt-2 pb-5 lg:mt-0 lg:pt-16">
           <div className="border border-gray-200 w-full hidden lg:block"></div>
           <ul className="menu w-full grow space-y-1">{links}</ul>
         </div>

@@ -16,7 +16,7 @@ import BeARider from "../pages/BeARider/BeARider";
 import SendParcel from "../pages/SendParcel/SendParcel";
 import DashboardLayout from "../layouts/DashboardLayout";
 import Dashboard from "../pages/Dashboard/Dashboard/Dashboard";
-import Myparcel from "../pages/Dashboard/MyParcel/Myparcel";
+import MyParcel from "../pages/Dashboard/MyParcel/MyParcel";
 
 export const router = createBrowserRouter([
   {
@@ -110,7 +110,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/my-parcel",
-        Component: Myparcel,
+        Component: MyParcel,
       },
     ],
   },

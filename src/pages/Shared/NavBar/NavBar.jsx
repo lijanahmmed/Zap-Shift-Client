@@ -41,6 +41,16 @@ const NavBar = () => {
       </li>
       <li>
         <NavLink
+          to="/dashboard"
+          className={({ isActive }) =>
+            isActive ? "bg-primary px-4 font-semibold rounded-3xl" : ""
+          }
+        >
+          Dashboard
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
           to="/coverage"
           className={({ isActive }) =>
             isActive ? "bg-primary px-4 font-semibold rounded-3xl" : ""
