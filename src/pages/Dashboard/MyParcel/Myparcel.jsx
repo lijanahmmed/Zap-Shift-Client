@@ -1,20 +1,28 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useState } from "react";
 import useAuth from "../../../Hook/useAuth";
 import useAxiosSecure from "../../../Hook/useAxiosSecure";
 import { MdPreview } from "react-icons/md";
 import { FiEdit } from "react-icons/fi";
+import { Link } from "react-router";
+import Loading from "../../Loading/Loading";
 
 const MyParcel = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const [loading, setLoading] = useState(true);
   const { data: parcels = [] } = useQuery({
     queryKey: ["myParcel", user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`/parcels?email=${user?.email}`);
+      setLoading(false);
       return res.data;
     },
   });
+
+  if (loading) {
+    return <Loading></Loading>;
+  }
 
   return (
     <div className="pb-15">
@@ -41,7 +49,7 @@ const MyParcel = () => {
               <tr>
                 <th>SL</th>
                 <th>Name</th>
-                <th>Cost</th>
+                <th>Charge</th>
                 <th>Payment Status</th>
                 <th>Action</th>
               </tr>
@@ -56,10 +64,13 @@ const MyParcel = () => {
                     <p className="text-yellow-600">{parcel.status}</p>
                   </td>
                   <td className="flex justify-center gap-1">
-                    <div className="tooltip" data-tip="View">
-                      <button className="btn hover:bg-primary">
+                    <div className="tooltip" data-tip="View Details">
+                      <Link
+                        to={`/parcel-details/${parcel._id}`}
+                        className="btn hover:bg-primary"
+                      >
                         <MdPreview />
-                      </button>
+                      </Link>
                     </div>
                     <div className="tooltip mx-1" data-tip="Edit">
                       <button className="btn hover:bg-primary">

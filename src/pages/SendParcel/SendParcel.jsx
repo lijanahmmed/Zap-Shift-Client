@@ -52,7 +52,7 @@ const SendParcel = () => {
     const parcelData = {
       ...data,
       cost,
-      status: "pending",
+      status: "Pending",
       createdAt: new Date(),
     };
 
@@ -80,15 +80,15 @@ const SendParcel = () => {
 
   return (
     <div className="mt-15 w-11/12 md:w-10/12 mx-auto">
-      <h1 className="text-4xl md:text-5xl font-bold">Send Parcel</h1>
-      <p className="text-xl font-bold mt-5 mb-10">Enter your parcel details</p>
+      <h1 className="text-4xl font-bold">Send Parcel</h1>
+      <p className="text-lg font-bold mt-5 mb-10">Enter your parcel details</p>
       <form onSubmit={handleSubmit(handleSendParcel)}>
         <div>
           <label className="label text-black mr-5">
             <input
               type="radio"
               {...register("parcelType", { required: true })}
-              value="document"
+              value="Document"
               className="radio"
               defaultChecked
             />
@@ -98,7 +98,7 @@ const SendParcel = () => {
             <input
               type="radio"
               {...register("parcelType", { required: true })}
-              value="non-document"
+              value="Non-document"
               className="radio"
             />
             Non document

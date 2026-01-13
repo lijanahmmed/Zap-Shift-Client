@@ -29,6 +29,16 @@ const DashboardLayout = () => {
       </li>
       <li>
         <NavLink
+          to="/send-parcel"
+          className={({ isActive }) =>
+            isActive ? "bg-primary px-4 font-semibold rounded-md" : ""
+          }
+        >
+          Send Parcel
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
           to="/my-parcel"
           className={({ isActive }) =>
             isActive ? "bg-primary px-4 font-semibold rounded-md" : ""
