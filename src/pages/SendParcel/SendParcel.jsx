@@ -142,7 +142,6 @@ const SendParcel = () => {
                 defaultValue={user.displayName}
                 className="input w-full"
                 placeholder="Sender Name"
-                readOnly
               />
 
               <label className="label text-black mt-2">Sender Email</label>
@@ -152,7 +151,6 @@ const SendParcel = () => {
                 defaultValue={user?.email}
                 className="input w-full"
                 placeholder="Sender Email"
-                readOnly
               />
 
               <label className="label text-black mt-2">Sender Phone No</label>
