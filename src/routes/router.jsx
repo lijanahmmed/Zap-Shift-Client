@@ -19,6 +19,7 @@ import Dashboard from "../pages/Dashboard/Dashboard/Dashboard";
 import MyParcel from "../pages/Dashboard/MyParcel/MyParcel";
 import ParcelDetails from "../pages/Dashboard/MyParcel/ParcelDetails";
 import Payment from "../pages/Dashboard/Payment/Payment";
+import EditParcel from "../pages/Dashboard/MyParcel/EditParcel";
 
 export const router = createBrowserRouter([
   {
@@ -121,6 +122,11 @@ export const router = createBrowserRouter([
       {
         path: "/parcel-details/:id",
         Component: ParcelDetails,
+      },
+      {
+        path: "/edit-parcel/:id",
+        Component: EditParcel,
+        loader: () => fetch("/serviceCenters.json").then((res) => res.json()),
       },
     ],
   },

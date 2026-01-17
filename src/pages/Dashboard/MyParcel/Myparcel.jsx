@@ -108,9 +108,9 @@ const MyParcel = () => {
                       </Link>
                     </div>
                     <div className="tooltip mx-1" data-tip="Edit">
-                      <button className="btn hover:bg-primary">
+                      <Link to={`/edit-parcel/${parcel._id}`} className="btn hover:bg-primary">
                         <FiEdit />
-                      </button>
+                      </Link>
                     </div>
                     <div className="tooltip mx-1" data-tip="Delete">
                       <button

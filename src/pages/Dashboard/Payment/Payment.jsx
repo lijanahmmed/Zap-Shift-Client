@@ -11,7 +11,6 @@ const Payment = () => {
     queryKey: ["parcel", parcelId],
     queryFn: async () => {
       const res = await axiosSecure.get(`/parcel/${parcelId}`);
-      console.log(parcel);
       return res.data;
     },
   });
@@ -22,7 +21,7 @@ const Payment = () => {
 
   return (
     <div>
-      <h2 className="text-3xl font-bold">Please Pay</h2>
+      <h2 className="text-3xl font-bold">Please Pay for {parcel.parcelName}</h2>
     </div>
   );
 };
